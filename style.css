@@ -1,0 +1,414 @@
+/* ==================== RESET E BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #FAFFC4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #75445C;
+}
+
+/* ==================== CONTAINER DO QUIZ ==================== */
+.quiz {
+    background: #FFE1BB;
+    width: 100%;
+    max-width: 680px;
+    border-radius: 24px;
+    padding: 32px 28px;
+    box-shadow:
+        0 12px 40px rgba(117, 68, 92, 0.16),
+        0 4px 12px rgba(255, 128, 199, 0.20);
+    border: 3px solid #FF80C7;
+}
+
+/* ==================== TÍTULO ==================== */
+.quiz h1 {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #75445C;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+/* ==================== TOPO (Pergunta + Prêmio) ==================== */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+#numero-pergunta {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #75445C;
+    background: #FAFFC4;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: 2px solid #FFBDA3;
+}
+
+#premio {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #75445C;
+    background: linear-gradient(135deg, #FF80C7, #FFBDA3);
+    padding: 8px 16px;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(255, 128, 199, 0.30);
+}
+
+/* ==================== BARRA DE PROGRESSO ==================== */
+.barra {
+    width: 100%;
+    height: 10px;
+    background: #FAFFC4;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 2px solid #FFBDA3;
+}
+
+#progresso {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #FFBDA3, #FF80C7);
+    border-radius: 50px;
+    transition: width 0.4s ease;
+}
+
+/* ==================== MATÉRIA ==================== */
+.materia {
+    display: inline-block;
+    background: #FAFFC4;
+    color: #75445C;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+    border: 2px solid #FFBDA3;
+}
+
+/* ==================== PERGUNTA ==================== */
+#pergunta {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #75445C;
+    margin-bottom: 24px;
+}
+
+/* ==================== ALTERNATIVAS ==================== */
+#alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.alternativa {
+    background: #FAFFC4;
+    border: 2px solid #FFBDA3;
+    color: #75445C;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 16px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.alternativa:hover:not(:disabled) {
+    background: #FF80C7;
+    border-color: #E65AA7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(255, 128, 199, 0.28);
+    color: #54233F;
+}
+
+.alternativa:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+/* Resposta correta */
+.alternativa.correta {
+    background: #FAFFC4 !important;
+    border-color: #A8B65A !important;
+    color: #4F632B !important;
+    font-weight: 600;
+}
+
+/* Resposta errada */
+.alternativa.errada {
+    background: #FFBDA3 !important;
+    border-color: #D96C79 !important;
+    color: #702F45 !important;
+}
+
+/* Alternativa eliminada */
+.alternativa.eliminada {
+    opacity: 0.35 !important;
+    text-decoration: line-through;
+    pointer-events: none;
+}
+
+/* ==================== MENSAGEM ==================== */
+#mensagem {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-height: 28px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+#mensagem.acerto {
+    color: #4F632B;
+    background: #FAFFC4;
+    border: 1px solid #D5DF8B;
+}
+
+#mensagem.erro {
+    color: #702F45;
+    background: #FFBDA3;
+    border: 1px solid #E9958A;
+}
+
+#mensagem.risco {
+    color: #75445C;
+    background: #FFE1BB;
+    border: 2px solid #FF80C7;
+}
+
+/* ==================== BOTÕES ESPECIAIS ==================== */
+.controles-especiais {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.controles-especiais button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 14px 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #54233F;
+}
+
+/* Botão Parar */
+#parar {
+    background: linear-gradient(135deg, #FFBDA3, #FF80C7);
+    box-shadow: 0 4px 12px rgba(255, 128, 199, 0.25);
+}
+
+#parar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 128, 199, 0.35);
+}
+
+/* Botão Eliminar */
+#eliminar {
+    background: linear-gradient(135deg, #FF80C7, #E96BAE);
+    box-shadow: 0 4px 12px rgba(255, 128, 199, 0.25);
+}
+
+#eliminar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 128, 199, 0.35);
+}
+
+/* Botão Risco */
+#risco {
+    background: linear-gradient(135deg, #FFBDA3, #FFE1BB);
+    box-shadow: 0 4px 12px rgba(217, 140, 121, 0.25);
+}
+
+#risco:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(217, 140, 121, 0.35);
+}
+
+/* Botão Reiniciar */
+#reiniciar {
+    background: linear-gradient(135deg, #75445C, #9C5879);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(117, 68, 92, 0.25);
+}
+
+#reiniciar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(117, 68, 92, 0.35);
+}
+
+/* Estado desabilitado */
+.controles-especiais button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ==================== BOTÃO PRÓXIMA ==================== */
+#proxima {
+    width: 100%;
+    background: linear-gradient(135deg, #FF80C7, #FFBDA3);
+    color: #54233F;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(255, 128, 199, 0.30);
+}
+
+#proxima:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 128, 199, 0.40);
+    background: linear-gradient(135deg, #FFBDA3, #FF80C7);
+}
+
+#proxima:disabled {
+    background: #F0D8CC;
+    color: #9C817E;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 520px) {
+    .quiz {
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+
+    .quiz h1 {
+        font-size: 1.55rem;
+    }
+
+    #pergunta {
+        font-size: 1.2rem;
+    }
+
+    .controles-especiais {
+        grid-template-columns: 1fr;
+    }
+
+    .topo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+/* Fundo decorativo com pequenos pontos e estrelas */
+body {
+    position: relative;
+    isolation: isolate;
+    background-color: #FAFFC4;
+    background-image:
+        radial-gradient(circle, #FF80C7 1.7px, transparent 2.2px),
+        radial-gradient(circle, #FFBDA3 2px, transparent 2.7px),
+        radial-gradient(circle, rgba(255, 128, 199, 0.65) 1px, transparent 1.8px);
+    background-size: 67px 71px, 113px 127px, 43px 53px;
+    background-position: 8px 12px, 34px 48px, 19px 31px;
+}
+
+body::before {
+    content: "✦     ✧       ⋆       ✧      ✦       ⋆";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    color: #FF80C7;
+    font-size: 19px;
+    line-height: 105px;
+    letter-spacing: 10px;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 7px rgba(255, 128, 199, 0.55);
+}
+
+/* Cartão mais pequeno e compacto */
+.quiz {
+    width: 100%;
+    max-width: 540px;
+    padding: 22px 20px;
+    border-radius: 19px;
+}
+
+.quiz h1 {
+    font-size: 1.55rem;
+    margin-bottom: 15px;
+}
+
+#pergunta {
+    font-size: 1.12rem;
+    margin-bottom: 15px;
+}
+
+.alternativa {
+    padding: 11px 14px;
+    font-size: 0.96rem;
+}
+
+#alternativas {
+    gap: 8px;
+    margin-bottom: 13px;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .quiz {
+        padding: 19px 14px;
+    }
+
+    .quiz h1 {
+        font-size: 1.35rem;
+    }
+}
+/* ==================== QUADRO MAIS LARGO ==================== */
+.quiz {
+    width: 100%;
+    max-width: 760px; /* Aumenta apenas a largura */
+    padding: 24px 26px;
+    margin: 0 auto;
+}
+
+/* Manter o conteúdo a ocupar a largura disponível */
+#pergunta {
+    max-width: 100%;
+}
+
+.alternativa {
+    width: 100%;
+}
+
+/* Adaptar a largura em telemóveis */
+@media (max-width: 520px) {
+    .quiz {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 16px;
+    }
+}
